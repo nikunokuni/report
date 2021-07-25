@@ -114,7 +114,7 @@ public abstract class ActionBase {
             }
             return LocalDate.parse(strDate);
         }
-//以下あいまいな理解
+//TODO 以下あいまいな理解
         //リクエストスコープから指定されたパラメータの値を取得し、返却する
         protected String getRequestParam(AttributeConst key) {
             return request.getParameter(key.getValue());

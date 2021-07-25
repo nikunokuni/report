@@ -27,7 +27,7 @@ public class EmployeeService extends ServiceBase{
         //Employee型からView型に変換して返却
     }
     //従業員テーブルのデータの件数を取得する
-    public long countALL() {
+    public long countAll() {
         long empCount = (long)em.createNamedQuery(JpaConst.Q_EMP_COUNT,Long.class)
                 .getSingleResult();
         return empCount;
