@@ -23,7 +23,7 @@ public class EmployeeAction extends ActionBase{
         invoke();
         service.close();
     }
-//一覧画面の表示
+//一覧画面の表示  呼ばれると、DBのテーブルが作成される
     public void index() throws ServletException,IOException{
         int page = getPage();
         List<EmployeeView> employees = service.getPerPage(page);
@@ -53,10 +53,12 @@ public class EmployeeAction extends ActionBase{
         forward(ForwardConst.FW_EMP_NEW);
     }
     //新規登録をおこなう
-    public void create()throws ServletException,IOException{
-        //CSRF対策
-        if(checkToken()) {
-            //パラメータの値をもとに従業員情報のインスタンスを作成
+    public void create() throws ServletException, IOException {
+
+        //CSRF対策 tokenのチェック
+        if (checkToken()) {
+
+            //パラメータの値を元に従業員情報のインスタンスを作成する
             EmployeeView ev = new EmployeeView(
                     null,
                     getRequestParam(AttributeConst.EMP_CODE),
@@ -66,26 +68,32 @@ public class EmployeeAction extends ActionBase{
                     null,
                     null,
                     AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
-//アプリケーションスコープからpepper文字列の取得
-            String pepper = getContextScope(PropertyConst.PEPPER);
-            //従業員情報の登録
-            List<String>errors = service.create(ev, pepper);
 
-            if(errors.size()>0) {
-                putRequestScope(AttributeConst.TOKEN,getTokenId());
-                //入力された従業員情報
-                putRequestScope(AttributeConst.EMPLOYEE,ev);
-                //エラーのリスト
-                putRequestScope(AttributeConst.ERR,errors);
+            //アプリケーションスコープからpepper文字列を取得
+            String pepper = getContextScope(PropertyConst.PEPPER);
+
+            //従業員情報登録
+            List<String> errors = service.create(ev, pepper);
+
+            if (errors.size() > 0) {
+                //登録中にエラーがあった場合
+
+                putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+                putRequestScope(AttributeConst.EMPLOYEE, ev); //入力された従業員情報
+                putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
+
                 //新規登録画面を再表示
                 forward(ForwardConst.FW_EMP_NEW);
-            }else {
-                putSessionScope(AttributeConst.FLUSH,MessageConst.I_REGISTERED.getMessage());
+
+            } else {
+                //登録中にエラーがなかった場合
+
+                //セッションに登録完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
                 //一覧画面にリダイレクト
-                redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
+                redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
             }
-
 
         }
     }
@@ -102,4 +110,5 @@ public class EmployeeAction extends ActionBase{
         //詳細画面の表示
         forward(ForwardConst.FW_EMP_SHOW);
     }
+
 }

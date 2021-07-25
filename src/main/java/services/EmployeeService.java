@@ -17,8 +17,8 @@ public class EmployeeService extends ServiceBase{
 
     //指定されたページ数の一覧画面に表示するデータを取得
     public List<EmployeeView> getPerPage(int page){
+        //EmployeeテーブルからSELECTした結果
         List<Employee> employees = em.createNamedQuery(JpaConst.Q_EMP_GET_ALL, Employee.class)
-                //EmployeeテーブルからSELECTした結果
                 .setFirstResult(JpaConst.ROW_PER_PAGE*(page-1))//何件目から読みますか
                 .setMaxResults(JpaConst.ROW_PER_PAGE)//全部で何件読みますか
                 .getResultList();
@@ -55,7 +55,7 @@ public class EmployeeService extends ServiceBase{
 
     //社員番号から該当するデータを取得
     public long countByCode(String code) {
-        long employee_count = (long)em.createNamedQuery(JpaConst.Q_EMP_COUNT_RESISTERED_BY_CODE,long.class)
+        long employee_count = (long)em.createNamedQuery(JpaConst.Q_EMP_COUNT_RESISTERED_BY_CODE,Long.class)
                 .setParameter(JpaConst.JPQL_PARM_CODE,code)
                 .getSingleResult();
         return employee_count;
