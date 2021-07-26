@@ -118,7 +118,7 @@ public class EmployeeService extends ServiceBase{
         savedEmp.setDeleteFlag(JpaConst.EMP_DEL_TRUE);
         update(savedEmp);
     }
-
+//社員番号とパスワードを条件に検索し、データが取得できるかどうかを認証
     public Boolean validateLogin(String code,String plintPass,String pepper) {
         boolean isValidEmployee = false;
         if(code !=null&&!code.equals("")&&plintPass!=null&&!plintPass.equals("")) {
