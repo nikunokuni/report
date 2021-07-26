@@ -114,10 +114,11 @@ public class EmployeeService extends ServiceBase{
         EmployeeView savedEmp = findOne(id);
         LocalDateTime today = LocalDateTime.now();
         savedEmp.setUpdatedAt(today);
-
+//フラグの更新
         savedEmp.setDeleteFlag(JpaConst.EMP_DEL_TRUE);
         update(savedEmp);
     }
+
     public Boolean validateLogin(String code,String plintPass,String pepper) {
         boolean isValidEmployee = false;
         if(code !=null&&!code.equals("")&&plintPass!=null&&!plintPass.equals("")) {

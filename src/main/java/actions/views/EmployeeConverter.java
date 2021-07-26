@@ -78,6 +78,6 @@ public class EmployeeConverter {
         e.setAdminFlag(ev.getAdminFlag());
         e.setCreatedAt(ev.getCreatedAt());
         e.setUpdatedAt(ev.getUpdatedAt());
-        e.setDeleteFlag(e.getDeleteFlag());
+        e.setDeleteFlag(ev.getDeleteFlag());
     }
 }
