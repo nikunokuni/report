@@ -24,7 +24,7 @@ public class ReportService extends ServiceBase{
     }
 
     //指定した従業員が作成した日報データの件数を取得し返却する
-    public long cocuntAllMine(EmployeeView employee) {
+    public long countAllMine(EmployeeView employee) {
         long count = (long)em.createNamedQuery(JpaConst.Q_REP_COUNT_ALL_MINE,Long.class)
                 .setParameter(JpaConst.JPQL_PARM_EMPLOYEE,EmployeeConverter.toModel(employee))
                 .getSingleResult();
