@@ -106,4 +106,41 @@ public class ReportAction extends ActionBase{
         }
     }
 
+    //詳細画面の表示
+    public void show()throws ServletException,IOException{
+        //idから日報データの取得
+        ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        if(rv==null) {
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+        }else {
+            //取得した日報データ
+            putRequestScope(AttributeConst.REPORT,rv);
+            //詳細画面の表示
+            forward(ForwardConst.FW_REP_SHOW);
+        }
+
+
+    }
+    //編集画面を表示
+    public void edit() throws ServletException,IOException{
+        //idを条件に日報データを取得する
+        ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        //セッションからログイン中の従業員情報を取得
+        EmployeeView ev = (EmployeeView)getSessionScope(AttributeConst.LOGIN_EMP);
+
+        if(rv==null||ev.getId()!=rv.getEmployee().getId()) {
+            //該当の日報データが存在しないまたはログインしている人と作成者が違う場合はエラー
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+        }else {
+            //CSRF対策
+            putRequestScope(AttributeConst.TOKEN,getTokenId());
+            //取得した日報データ
+            putRequestScope(AttributeConst.REPORT,rv);
+
+            //編集画面を表示
+            forward(ForwardConst.FW_REP_EDIT);
+        }
+    }
+
 }
