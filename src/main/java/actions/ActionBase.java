@@ -48,6 +48,7 @@ public abstract class ActionBase {
                 IllegalArgumentException| InvocationTargetException | NullPointerException e) {
             //commandの値が不正で実行できない場合
             forward(ForwardConst.FW_ERR_UNKNOWN);
+            e.printStackTrace();
         }
     }
 
