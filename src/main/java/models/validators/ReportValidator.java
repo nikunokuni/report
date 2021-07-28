@@ -3,7 +3,7 @@ package models.validators;
 import java.util.ArrayList;
 import java.util.List;
 
-import actions.ReportView;
+import actions.views.ReportView;
 import constants.MessageConst;
 
 //日報インスタンスに設定されている値のバリデーションを行うクラス

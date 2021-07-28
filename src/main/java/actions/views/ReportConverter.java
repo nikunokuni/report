@@ -3,7 +3,6 @@ package actions.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import actions.ReportView;
 import models.Report;
 
 //日報データとViewモデルの変換を行うクラス

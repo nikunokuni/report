@@ -1,9 +1,8 @@
-package actions;
+package actions.views;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import actions.views.EmployeeView;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
