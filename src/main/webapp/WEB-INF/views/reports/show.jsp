@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="constants.ForwardConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}"/>
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}"/>
@@ -40,7 +41,7 @@
 
 		<c:if test="${sessionScope.login_employee.id==report.employee.id}">
 			<p>
-				<a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}'/>">この日報を編集する</a>
+				<a href="<c:url value='?action=${actRep}&command=${commEdit}&id=${report.id}'/>">この日報を編集する</a>
 			</p>
 		</c:if>
 
