@@ -12,7 +12,7 @@
 			<div id="flush_error">社員番号かパスワードが間違っています</div>
 		</c:if>
 		<c:if test="${flush != null}">
-			<div id = "flush_seccess">
+			<div id = "flush_success">
 				<c:out value="${flush}"></c:out>
 			</div>
 		</c:if>
